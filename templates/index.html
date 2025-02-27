@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyphrase Extractor</title>
+</head>
+<body>
+    <h1>Keyphrase Extractor with POS Tagging</h1>
+    <form method="POST">
+        <textarea name="text" rows="5" cols="50" placeholder="Enter your text here..."></textarea><br>
+        <button type="submit">Extract Keyphrases</button>
+    </form>
+
+    {% if phrases %}
+        <h2>Extracted Keyphrases</h2>
+        <ul>
+            {% for phrase, details in phrases.items() %}
+                <li><b>{{ phrase }}</b> ({{ details.pos }}): {{ details.definition }}</li>
+            {% endfor %}
+        </ul>
+
+        <form method="POST" action="/download">
+            <input type="hidden" name="text" value="{{ text }}">
+            <button type="submit">Download as PDF</button>
+        </form>
+    {% endif %}
+</body>
+</html>
